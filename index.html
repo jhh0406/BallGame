@@ -6,10 +6,26 @@
     <style>
       * { padding: 0; margin: 0; }
     	canvas { background: #eee; display: block; margin: 0 auto; }
+      .out {
+        text-align: center;
+      }
+      input {
+        font-size: 50px;
+      }
     </style>
   </head>
   <body>
     <canvas id="myCanvas" width="480" height="320"></canvas>
+    <div class="out">
+      <div class="in">
+        <input type="button" value="<--" onclick="if(leftPressed && paddleX > 0) {
+          paddleX -= 7;
+        }"></input>
+        <input type="button" value="-->" onclick="if (rightPressed && paddleX < canvas.width-paddleWidth) {
+          paddleX += 7;
+        }"></input>
+      </div>
+    </div>
     <script>
       var speed = 0.75;
 
@@ -89,7 +105,7 @@
                 b.status = 0;
                 score++;
                 if(score == brickRowCount*brickColumnCount) {
-                  alert("클리어!축하해요!");
+                  alert("외계인 삐리빕~ 구독 삐리빕!");
                   document.location.reload();
                 }
               }
