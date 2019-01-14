@@ -6,29 +6,22 @@
     <style>
       * { padding: 0; margin: 0; }
     	canvas { background: #eee; display: block; margin: 0 auto; }
-      .out {
-        text-align: center;
+      html, body {
+        width: 100%;
       }
-      input {
-        font-size: 50px;
+      p {
+        width: 480px;
+        height: 100px;
+        background-color: black;
+        margin: 0 auto;
       }
     </style>
   </head>
   <body>
     <canvas id="myCanvas" width="480" height="320"></canvas>
-    <div class="out">
-      <div class="in">
-        <input type="button" value="<--" onclick="if(leftPressed && paddleX > 0) {
-          paddleX -= 7;
-        }"></input>
-        <input type="button" value="-->" onclick="if (rightPressed && paddleX < canvas.width-paddleWidth) {
-          paddleX += 7;
-        }"></input>
-      </div>
-    </div>
+    <p onclickmove="mobileMove(e)"></p>
     <script>
       var speed = 0.75;
-
 
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
@@ -63,7 +56,6 @@
       document.addEventListener("keydown", keyDownHandler, false);
       document.addEventListener("keyup", keyUpHandler, false);
       document.addEventListener("mousemove", mouseMoveHandler, false);
-      document.addEventListener("touchmove", mobileMove);
 
       function keyDownHandler(e) {
         if(e.key == "Right" || e.key == "ArrowRight") {
@@ -91,7 +83,7 @@
       }
 
       function mobileMove(e) {
-        var relativeX = e.clientX - canvas.offsetLeft;
+        var relativeX = e.touch[0].clientX - canvas.offsetLeft;
         if(relativeX > 0 && relativeX < canvas.width) {
           paddleX = relativeX - paddleWidth/2;
         }
@@ -113,7 +105,7 @@
                 b.status = 0;
                 score++;
                 if(score == brickRowCount*brickColumnCount) {
-                  alert("외계인 삐리빕~ 구독 삐리빕!");
+                  alert("게임 클리어!");
                   document.location.reload();
                 }
               }
